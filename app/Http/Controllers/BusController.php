@@ -12,7 +12,7 @@ class BusController extends Controller
     //::GET http://127.0.0.1:8000/api/buses :://
     public function index()
     {
-        $buses = Bus::paginate(15);
+        $buses = Bus::orderBy('created_at', 'desc')->paginate(5);
 
         return BusResource::collection($buses);
     }
@@ -34,7 +34,7 @@ class BusController extends Controller
 
         $bus->id = $request->input('id');
 
-        $bus->depart_loc = $request->input('depart_loc');;
+        $bus->depart_loc = $request->input('depart_loc');
         $bus->arrival_loc = $request->input('arrival_loc');
         $bus->depart_date = $request->input('depart_date');
         $bus->depart_time = $request->input('depart_time');
